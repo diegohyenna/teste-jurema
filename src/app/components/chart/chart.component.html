@@ -1,0 +1,33 @@
+<div *ngIf="errors" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Error</strong> {{errors.message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+            <label for="state">Estados</label>
+            <select class="form-control" ngModel="states" (change)="onSelected($event)">
+                <option value="">Selecione um estado</option>
+                <option *ngFor="let state of states" value="{{state.id}}">{{state.nome}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="form-group" *ngIf="cities">
+            <label for="state">Cidades</label>
+            <select class="form-control" ngModel="cities" (change)="onChartSearch($event)">
+                <option value="">Selecione uma cidade</option>
+                <option *ngFor="let city of cities" value="{{city.id}}">{{city.nome}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="loading" class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+</div>
+
+<div id="chart"></div>
