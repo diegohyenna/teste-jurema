@@ -35,6 +35,9 @@ export class ChartComponent implements OnInit {
 
         this.states = res;
       })
+      .catch(err => {
+        this.errors['message'] = "Hoveu algum erro ao tentar carregar os estados!"
+      })
   }
 
   ngOnInit() {
@@ -60,6 +63,9 @@ export class ChartComponent implements OnInit {
 
         this.cities = res;
         this.loading = false;
+      })
+      .catch(err => {
+        this.errors['message'] = "Hoveu algum erro ao tentar carregar as cidades!"
       })
   }
 
