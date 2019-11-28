@@ -13,10 +13,6 @@ import { Helpers } from '../../helpers';
 export class ChartComponent implements OnInit {
 
   public loading: boolean;
-
-  public errors = {
-    message: null
-  };
   
   //grafico
   public chart;
@@ -71,16 +67,8 @@ export class ChartComponent implements OnInit {
   statesInit() {
     this.ibgeService.getStates()
       .then(res => {
-        if (res.length != 0) {
-          res = Helpers.alphabeticOrder(res)
-
-          this.states = res;
-        } else {
-          this.errors.message = "Não foi possível carregar os estados!"
-        }
-      })
-      .catch(err => {
-        this.errors.message = "Hoveu algum erro ao tentar carregar os estados!"
+        res = Helpers.alphabeticOrder(res)
+        this.states = res;
       })
   }
 
@@ -91,18 +79,9 @@ export class ChartComponent implements OnInit {
   citiesInit(state: string){
     this.ibgeService.getCitiesByState(state)
       .then(res => {
-        if (res.length != 0) {
-          res = Helpers.alphabeticOrder(res);
-
-          this.cities = res;
-        } else {
-          this.errors.message = "Não foi possível carregar as cidades!"
-        }
+        res = Helpers.alphabeticOrder(res);
+        this.cities = res;
         this.loading = false;
-      })
-      .catch(err => {
-        this.loading = false;
-        this.errors.message = "Hoveu algum erro ao tentar carregar as cidades!"
       })
   }
 
@@ -174,24 +153,17 @@ export class ChartComponent implements OnInit {
 
     this.bolsaFamiliaService.getByYear(year, city, '1')
       .then(res => {
-        if (res.length != 0) {
-          let values = [];
-          let beneficiaries = [];
 
-          res.map(items => {
-            items[0] ? values.push(items[0].valor) : "";
-            items[0] ? beneficiaries.push(items[0].quantidadeBeneficiados) : "";
-          })
+        let values = [];
+        let beneficiaries = [];
 
-          this.drawChart(values, beneficiaries);
-        } else {
-          this.errors.message = "Não existem dados para esse periodo ou não foi possível carregar o gráfico!"
-        }
+        res.map(items => {
+          items[0] ? values.push(items[0].valor) : "";
+          items[0] ? beneficiaries.push(items[0].quantidadeBeneficiados) : "";
+        })
+
+        this.drawChart(values, beneficiaries);
         this.loading = false;
-      })
-      .catch(err => {
-        this.loading = false;
-        this.errors.message = "Hoveu algum erro ao tentar carregar o gráfico!"
       })
   }
 

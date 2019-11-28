@@ -59,23 +59,9 @@ export class BolsaFamiliaService {
     }
    
     return Promise.all(tasks)
-      .then(res => {
-
-        let itensVoid = true;
-
-        res.map( item => {
-          if(item.length != 0){
-            itensVoid = false;
-          }
-        });
-
-        if(itensVoid){
-          return []
-        }else{
-          return res;
-        }
-
-      })
+      .then(res => 
+        res
+      )
       .catch( err => 
         []
       )  
