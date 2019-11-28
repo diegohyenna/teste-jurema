@@ -16,8 +16,9 @@ export class IbgeService {
 
   /**
    * Obtem todos os estados do brasil
+   * @return {Promise<[]>} Promise Array
    */
-  getStates(){
+  getStates(): Promise<[]>{
 
     let url = new URL(this.url);    
 
@@ -33,8 +34,9 @@ export class IbgeService {
   /**
    * Obtem todas as cidades de um estado
    * @param {string} idState Id do estado a ser pesquisado
+   * @return {Promise<[]>}
    */
-  getCitiesByState(idState){
+  getCitiesByState(idState): Promise<[]>{
 
     let url = new URL(`${this.url}/${idState}/municipios`);
     

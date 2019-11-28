@@ -18,9 +18,10 @@ export class BolsaFamiliaService {
    * Obtem os dados do bolsa familia por ano e mes e cidade
    * @param {string} yearMonth ano e mes de consulta 'AAAA/MM'
    * @param {string} ibgeCode Id da cidade obtido pelo ibge
-   * @param {string} page Numero da pagina 
+   * @param {string} page Numero da pagina
+   * @return {Promise[]} Promise Array 
    */
-  getByMonth(monthAno, ibgeCode, page){
+  getByMonth(monthAno, ibgeCode, page): Promise<[]>{
 
     let url = new URL(this.url);    
     let params = {mesAno: monthAno, codigoIbge: ibgeCode, pagina: page }
@@ -42,9 +43,10 @@ export class BolsaFamiliaService {
    * Obtem os dados do bolsa familia por ano e cidade
    * @param {string} year Ano de consulta 'AAAA' 
    * @param {string} ibgeCode Id da cidade obtido pelo ibge
-   * @param {string} page Numero da pagina 
+   * @param {string} page Numero da pagina
+   * @return {Promise<any>} Promise Arrays 
    */
-  getByYear(year, ibgeCode, page){
+  getByYear(year, ibgeCode, page): Promise<any>{
 
     let tasks = [];
     let month;
