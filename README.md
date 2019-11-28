@@ -18,4 +18,5 @@ Como eu quero mostrar as duas tecnicas, então disponibilizei os dois links
 ```npm install```
 
 ## Como rodar localmente
+```npm install -g @angular/cli```
 ```ng serve```
